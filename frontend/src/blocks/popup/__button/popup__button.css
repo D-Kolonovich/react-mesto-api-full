@@ -1,0 +1,30 @@
+.popup__button {
+    background: transparent;
+    background-image: url(../../../images/close_button.svg);
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    border: none;
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    cursor: pointer;
+    padding: 0;
+    transform: rotate(-45deg);
+}
+.popup__button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+    }
+
+@media screen and (max-width: 767px) {
+    .popup__button {
+        margin-left: 230px;
+        margin-bottom: 40px;
+        width: 26px;
+        height: 26px;
+        right: 5px;
+    }
+}
+
+    

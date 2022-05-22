@@ -1,0 +1,7 @@
+.profile__wrap-avatar {
+    position: relative;
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+    overflow: hidden;
+  }

@@ -1,0 +1,14 @@
+.form__input-autorization {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 17px;
+    text-align: left;
+    width: 358px;
+    padding-bottom: 13px;
+    margin-bottom: 30px;
+    background: #000000;
+    color: #cccccc;
+    border: none;
+    border-bottom: 2px solid #cccccc;
+}

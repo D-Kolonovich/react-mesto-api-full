@@ -1,0 +1,6 @@
+.profile__button {
+    appearance: none;
+    padding: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+}
