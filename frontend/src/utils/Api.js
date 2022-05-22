@@ -5,16 +5,15 @@ class Api {
       this._headers = headers;
     }
   
-    
-    // getToken() {
-    //   return `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjg5NjFkNjE0MGE0YjQ3NTQwMjFhNjgiLCJpYXQiOjE2NTMxNzEyMzIsImV4cCI6MTY1Mzc3NjAzMn0.CI92CupsCxMVUj5oT160s0i3Xk-q2b1zxUV3IGxVG3w`;
-    // }
+    _getToken = () => {
+      return `Bearer ${localStorage.getItem('jwt')}`;
+    }
 
     //получить информацию о пользователе
     getUserInfo() {
       return fetch(`${this._baseUrl}/users/me`, {
         headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          authorization: this._getToken(),
           'Content-Type': 'application/json'
         }
       })
@@ -26,7 +25,7 @@ class Api {
       alert(this._baseUrl)
       return fetch(`${this._baseUrl}/cards`, {
         headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          authorization: this._getToken(),
           'Content-Type': 'application/json'
         }
       })
@@ -38,7 +37,7 @@ class Api {
       return fetch(`${this._baseUrl}/users/me`, {
         method: 'PATCH',
         headers: {
-          authorization: this.getToken(),
+          authorization: this._getToken(),
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -54,7 +53,7 @@ class Api {
       return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
-          authorization: this.getToken(),
+          authorization: this._getToken(),
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -69,7 +68,7 @@ class Api {
       return fetch(`${this._baseUrl}/cards`, {
         method: 'POST',
         headers: {
-          authorization: this.getToken(),
+          authorization: this._getToken(),
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -85,7 +84,7 @@ class Api {
       return fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
         headers: {
-          authorization: this.getToken(),
+          authorization: this._getToken(),
           'Content-Type': 'application/json'
         },
       })
@@ -97,7 +96,7 @@ class Api {
       return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
         method: 'PUT',
         headers: {
-          authorization: this.getToken(),
+          authorization: this._getToken(),
           'Content-Type': 'application/json'
         },
       })
@@ -109,7 +108,7 @@ class Api {
       return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
         method: 'DELETE',
         headers: {
-          authorization: this.getToken(),
+          authorization: this._getToken(),
           'Content-Type': 'application/json'
         },
       })
@@ -133,20 +132,12 @@ class Api {
     }
   }
   
-  const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
+  // const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
+  const baseUrl = 'https://api.dkmesto.students.nomoredomains.xyz' || 'http://localhost:3001';
 
   const api = new Api({
 
-    baseUrl: 'http://localhost:3001',
-    headers: {
-      authorization: getToken(),
-      'Content-Type': 'application/json'
-    },
-    // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-30',
-    // headers: {
-    //   authorization: '0d0c1ecf-4cb6-4add-84fe-013c8fefdb82',
-    //   'Content-Type': 'application/json'
-    // }
+    baseUrl: baseUrl,
   });
 
   export default api

@@ -24,19 +24,20 @@ function App() {
     about: "",
     avatar: "",
     _id: "",
-    cohort: "",
+    // cohort: "",
   });
 
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null); // false
 
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [status, setStatus] = useState(false); // неизвестно может и true
+  const [loggedIn, setLoggedIn] = useState(false); //true
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
   const [infoTooltipMessage, setInfoTooltipMessage] = useState("");
@@ -45,19 +46,19 @@ function App() {
   const [cards, setCards] = useState([]);
 
   const handleEditProfilePopupOpen = () => {
-    setEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setEditProfilePopupOpen(!isEditProfilePopupOpen); // true
   };
 
   const handleAddPlacePopupOpen = () => {
-    setAddPlacePopupOpen(!isAddPlacePopupOpen);
+    setAddPlacePopupOpen(!isAddPlacePopupOpen); //rtue
   };
 
   const handleEditAvatarPopupOpen = () => {
-    setEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+    setEditAvatarPopupOpen(!isEditAvatarPopupOpen); //true
   };
 
   const handleCardClick = (card) => {
-    setSelectedCard(card);
+    setSelectedCard(card); 
   };
 
   // const AUTHORIZATION_ERROR_CODE = 403;
@@ -67,7 +68,7 @@ function App() {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
-    setSelectedCard(null);
+    setSelectedCard(null); // false
   };
 
   // React.useEffect(() => {
@@ -86,15 +87,15 @@ function App() {
     if (loggedIn) {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([data, cards]) => {
-        setCurrentUser(data);
-        setCards(cards);
+        setCurrentUser(data); //data.user
+        setCards(cards); //data.cards
       })
       .catch((err) => {
         console.log(err);
       });
     }
-    
-  }, [loggedIn]);
+    // tokenCheck()
+  }, [loggedIn]); // history.location
 
   // React.useEffect(() => {
   //   api
@@ -122,7 +123,7 @@ function App() {
     api
       .setUserInfo(name, description)
       .then((data) => {
-        setCurrentUser(data);
+        setCurrentUser(data); //data.user
         closeAllPopups();
       })
       .catch((err) => {
@@ -134,7 +135,7 @@ function App() {
     api
       .setAvatar(avatar)
       .then((data) => {
-        setCurrentUser(data);
+        setCurrentUser(data); // data.user
         closeAllPopups();
       })
       .catch((err) => {
@@ -187,7 +188,7 @@ function App() {
         .getContent(token)
         .then((data) => {
           setLoggedIn(true);
-          setEmail(data.email);
+          setEmail(data.email); //data.data.email
           history.push("/");
         })
         .catch((err) => {

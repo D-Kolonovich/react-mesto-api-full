@@ -1,15 +1,15 @@
-import { BASE_URL } from "./Utils";
+import { baseUrl } from "./Utils";
 const handleResponse = (response) => {
   if (response.ok) return response.json();
   else return Promise.reject(response.status);
 };
 
 export const getToken = () => {
-  return `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjg5NjFkNjE0MGE0YjQ3NTQwMjFhNjgiLCJpYXQiOjE2NTMxNzExNTUsImV4cCI6MTY1Mzc3NTk1NX0.nBJXoTVgXNcQDPhoHh3XoR97D4wspvWSR_yeY6hNlhU'`;
+  return `Bearer ${localStorage.getItem('jwt')}`;
 }
 
 export const register = ({ email, password }) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export const register = ({ email, password }) => {
   }).then((res) => handleResponse(res));
 };
 export const authorize = ({ email, password }) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export const authorize = ({ email, password }) => {
   }).then((res) => handleResponse(res));
 };
 export const getContent = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
