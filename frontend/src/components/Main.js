@@ -7,13 +7,15 @@ import addButton from "../images/add_button.svg";
 
 function Main(props) {
   const currentUser = useContext(CurrentUserContext);
-
+  // console.log(useContext(CurrentUserContext));
+// console.log(props.cards, 'card');
   return (
+    currentUser.data ?
     <main className="content">
       <section className="profile page__section-hidden">
         <div className="profile__wrap-avatar">
           <img
-            src={currentUser.avatar}
+            src={currentUser.data.avatar}
             alt="Фото профиля"
             className="profile__avatar"
           />
@@ -28,7 +30,7 @@ function Main(props) {
 
         <div className="profile__info">
           <h1 className="profile__name" id="name">
-            {currentUser.name}
+            {currentUser.data.name}
           </h1>
           <button
             type="button"
@@ -38,7 +40,7 @@ function Main(props) {
             onClick={props.onEditProfile}
           ></button>
           <p className="profile__description" id="description">
-            {currentUser.about}
+            {currentUser.data.about}
           </p>
         </div>
 
@@ -54,21 +56,37 @@ function Main(props) {
       </section>
 
       <section className="elements">
-        {props.cards.map((card) => (
-          <Card
+        {props.cards.map((card) => {
+          if (card.data) {
+            return <Card
+            key={card.data._id}
+            cardId={card.data._id}
+            name={card.data.name}
+            link={card.data.link}
+            ownerId={card.data.owner}
+            likes={card.data.likes}
+            onCardClick={props.onCardClick}
+            onCardLike={props.onCardLike}
+            onCardDelete={props.onCardDelete}
+          />
+          } else {
+            return <Card
             key={card._id}
             cardId={card._id}
             name={card.name}
             link={card.link}
-            ownerId={card.owner._id}
+            ownerId={card.owner}
             likes={card.likes}
             onCardClick={props.onCardClick}
             onCardLike={props.onCardLike}
             onCardDelete={props.onCardDelete}
           />
-        ))}
+          }
+          
+        })}
       </section>
     </main>
+    : <div>загрузки</div>
   );
 }
 

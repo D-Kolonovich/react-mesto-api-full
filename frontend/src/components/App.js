@@ -20,10 +20,10 @@ import InfoTooltip from "./InfoTooltip";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
-    name: "",
-    about: "",
-    avatar: "",
-    _id: "",
+    // name: "",
+    // about: "",
+    // avatar: "",
+    // _id: "",
     // cohort: "",
   });
 
@@ -93,9 +93,12 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+
     }
     // tokenCheck()
   }, [loggedIn]); // history.location
+
+// console.log('app', currentUser);
 
   // React.useEffect(() => {
   //   api
@@ -123,9 +126,7 @@ function App() {
     api
       .setUserInfo(name, description)
       .then((data) => {
-        console.log(data);
-        // console.log(setCurrentUser({data:name, data:description}));
-        setCurrentUser(data.data); //data.user
+        setCurrentUser(data); //data.user
         closeAllPopups();
       })
       .catch((err) => {
@@ -137,8 +138,8 @@ function App() {
     api
       .setAvatar(avatar)
       .then((data) => {
-        console.log(data);
-        setCurrentUser(data.data); // data.user
+        // console.log(data);
+        setCurrentUser(data); // data.user
         closeAllPopups();
       })
       .catch((err) => {
@@ -146,6 +147,8 @@ function App() {
       });
   };
 
+  // console.log(currentUser.data);
+  
   const handleCardLike = (card) => {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((like) => like._id === currentUser._id);

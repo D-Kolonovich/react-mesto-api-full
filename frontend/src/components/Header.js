@@ -2,9 +2,14 @@ import React from "react";
 import { Switch } from "react-router-dom";
 import { Link, Route } from "react-router-dom";
 import logoSvg from "../images/logo.svg";
+import { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Header({ email, onClick }) {
+  const currentUser = useContext(CurrentUserContext);
+  // console.log(useContext(CurrentUserContext));
   return (
+    currentUser.data ?
     <header className="header">
       <Link to="/">
         <img src={logoSvg} alt="логотип" className="logo" />
@@ -14,7 +19,7 @@ function Header({ email, onClick }) {
         <Switch>
           <Route exact path="/">
               <li className="header__nav">
-                <p className="header__email">{email}</p>
+                <p className="header__email">{currentUser.data.email}</p>
               </li>
               <li className="header__nav">
                 <button className="header__out" onClick={onClick}>
@@ -39,6 +44,7 @@ function Header({ email, onClick }) {
         </Switch>
       </ul>
     </header>
+    : <div>загрузка</div>
   );
 }
 
