@@ -123,7 +123,9 @@ function App() {
     api
       .setUserInfo(name, description)
       .then((data) => {
-        setCurrentUser(data); //data.user
+        console.log(data);
+        // console.log(setCurrentUser({data:name, data:description}));
+        setCurrentUser(data.data); //data.user
         closeAllPopups();
       })
       .catch((err) => {
@@ -135,7 +137,8 @@ function App() {
     api
       .setAvatar(avatar)
       .then((data) => {
-        setCurrentUser(data); // data.user
+        console.log(data);
+        setCurrentUser(data.data); // data.user
         closeAllPopups();
       })
       .catch((err) => {

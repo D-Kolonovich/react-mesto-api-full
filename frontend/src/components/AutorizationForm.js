@@ -27,7 +27,7 @@ function AutorizationForm({ name, textButton, onSubmit, loginLink }) {
         type="email"
         placeholder="email"
         name="email"
-        value={email}
+        value={email || ''}
         onChange={handleChangeEmail}
         required
       ></input>
@@ -36,7 +36,7 @@ function AutorizationForm({ name, textButton, onSubmit, loginLink }) {
         type="password"
         placeholder="Пароль"
         name="password"
-        value={password}
+        value={password || ''}
         onChange={handleChangePassword}
         required
       ></input>

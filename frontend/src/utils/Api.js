@@ -1,8 +1,8 @@
 import { getToken } from './Auth';
 class Api {
-    constructor({ baseUrl, headers }) {
+    constructor({ baseUrl }) {
       this._baseUrl = baseUrl;
-      this._headers = headers;
+      // this._headers = headers;
     }
   
     _getToken = () => {
@@ -11,6 +11,7 @@ class Api {
 
     //получить информацию о пользователе
     getUserInfo() {
+      alert(this._baseUrl)
       return fetch(`${this._baseUrl}/users/me`, {
         headers: {
           authorization: this._getToken(),
@@ -22,14 +23,13 @@ class Api {
 
     //получить начальные карты
     getInitialCards() {
-      alert(this._baseUrl)
       return fetch(`${this._baseUrl}/cards`, {
         headers: {
           authorization: this._getToken(),
           'Content-Type': 'application/json'
         }
       })
-      .then(this._checkResponse).then(res=>res.data);
+      .then(this._checkResponse).then(res=>res.data); 
     }
 
     //установить информацию о пользователе
@@ -133,11 +133,13 @@ class Api {
   }
   
   // const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
-  const baseUrl = 'https://api.dkmesto.students.nomoredomains.xyz' || 'http://localhost:3001';
+
+  const baseUrl = 'http://localhost:3001';
+  // const baseUrl = 'https://api.dkmesto.students.nomoredomains.xyz' || 'http://localhost:3001';
 
   const api = new Api({
-
     baseUrl: baseUrl,
+    
   });
 
   export default api
