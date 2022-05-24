@@ -11,7 +11,6 @@ class Api {
 
     //получить информацию о пользователе
     getUserInfo() {
-      alert(this._baseUrl)
       return fetch(`${this._baseUrl}/users/me`, {
         headers: {
           authorization: this._getToken(),
@@ -132,8 +131,8 @@ class Api {
     }
   }
 
-  const baseUrl = 'http://localhost:3001';
-  // const baseUrl = 'https://api.dkmesto.students.nomoredomains.xyz' || 'http://localhost:3001';
+  // const baseUrl = 'http://localhost:3001';
+  const baseUrl = 'https://api.dkmesto.students.nomoredomains.xyz' || 'http://localhost:3001';
 
   const api = new Api({
     baseUrl: baseUrl,
