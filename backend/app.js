@@ -67,11 +67,11 @@ app.use(auth);
 app.use('/', require('./routes/users'));
 app.use('/', require('./routes/cards'));
 
-app.use(errorLogger); // подключаем логгер ошибок
-
 app.use('/', (req, res, next) => {
   next(new NotFoundError('Путь не найден')); // res.status(404).send
 });
+
+app.use(errorLogger); // подключаем логгер ошибок
 
 app.use(errors()); // обработчик ошибок celebrate
 
