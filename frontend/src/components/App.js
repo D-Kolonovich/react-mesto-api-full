@@ -24,20 +24,19 @@ function App() {
     // about: "",
     // avatar: "",
     // _id: "",
-    // cohort: "",
   });
 
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 
-  const [selectedCard, setSelectedCard] = useState(null); // false
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const [status, setStatus] = useState(false); // неизвестно может и true
-  const [loggedIn, setLoggedIn] = useState(false); //true
+  const [status, setStatus] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
   const [infoTooltipMessage, setInfoTooltipMessage] = useState("");
@@ -46,15 +45,15 @@ function App() {
   const [cards, setCards] = useState([]);
 
   const handleEditProfilePopupOpen = () => {
-    setEditProfilePopupOpen(!isEditProfilePopupOpen); // true
+    setEditProfilePopupOpen(!isEditProfilePopupOpen);
   };
 
   const handleAddPlacePopupOpen = () => {
-    setAddPlacePopupOpen(!isAddPlacePopupOpen); //rtue
+    setAddPlacePopupOpen(!isAddPlacePopupOpen);
   };
 
   const handleEditAvatarPopupOpen = () => {
-    setEditAvatarPopupOpen(!isEditAvatarPopupOpen); //true
+    setEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   };
 
   const handleCardClick = (card) => {
@@ -68,63 +67,29 @@ function App() {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setIsInfoTooltipPopupOpen(false);
-    setSelectedCard(null); // false
+    setSelectedCard(null);
   };
-
-  // React.useEffect(() => {
-  //     Promise.all([api.getUserInfo(), api.getInitialCards()])
-  //     .then(([data, cards]) => {
-  //       setCurrentUser(data);
-  //       setCards(cards);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-    
-  // }, []);
 
   React.useEffect(() => {
     if (loggedIn) {
       Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([data, cards]) => {
-        setCurrentUser(data); //data.user
-        setCards(cards); //data.cards
+        setCurrentUser(data);
+        setCards(cards);
       })
       .catch((err) => {
         console.log(err);
       });
 
     }
-    // tokenCheck()
-  }, [loggedIn]); // history.location
+  }, [loggedIn]);
 
-  // React.useEffect(() => {
-  //   api
-  //     .getInitialCards()
-  //     .then((cards) => {
-  //       setCards(cards);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-  // React.useEffect(() => {
-  //   api
-  //     .getUserInfo()
-  //     .then((data) => {
-  //       setCurrentUser(data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
 
   const handleUpdateUser = (name, description) => {
     api
       .setUserInfo(name, description)
       .then((data) => {
-        setCurrentUser(data); //data.user
+        setCurrentUser(data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -136,7 +101,7 @@ function App() {
     api
       .setAvatar(avatar)
       .then((data) => {
-        setCurrentUser(data); // data.user
+        setCurrentUser(data);
         closeAllPopups();
       })
       .catch((err) => {
@@ -146,14 +111,13 @@ function App() {
 
   const handleCardLike = (card) => {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((like) => like._id === currentUser._id);
+    const isLiked = card.likes.some((like) => like === currentUser.data._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
-        // console.log(newCard, 'card._id');
         setCards((cards) =>
-          cards.map((c) => (c._id === card._id ? newCard : c))
+          cards.map((c) => (c._id === card._id ? newCard.data : c))
         );
       })
       .catch((err) => console.log(err));
@@ -190,7 +154,7 @@ function App() {
         .getContent(token)
         .then((data) => {
           setLoggedIn(true);
-          setEmail(data.email); //data.data.email
+          setEmail(data.email);
           history.push("/");
         })
         .catch((err) => {

@@ -17,7 +17,7 @@ module.exports.createCard = (req, res, next) => {
       if (!card) {
         throw new ValidationError('Переданы некорректные данные'); // res.status(400).send
       } else {
-        res.send({ data: card });
+        res.send(card);
       }
     })
     .catch((err) => {

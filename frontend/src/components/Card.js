@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Card(props) {
- //  console.log(props.likes, '113234');
   const currentUser = useContext(CurrentUserContext);
   // Определяем, являемся ли мы владельцем текущей карточки
   const isOwn = props.ownerId === currentUser.data._id;
@@ -11,20 +10,19 @@ function Card(props) {
   const cardDeleteButtonClassName = `element__button_type_delete ${
     isOwn ? "" : "element__delete-button_hidden"
   }`;
-console.log(props.ownerId, ' props.ownerId', currentUser.data._id);
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-  const isLiked = props.likes.some((like) => like._id === currentUser.data._id);
+  const isLiked = props.card.likes.some((like) => like === currentUser.data._id);
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `element__like ${
     isLiked ? "element__button_type_active" : ""
   }`;
 
   function handleCardClick() {
-    props.onCardClick({ name: props.name, link: props.link });
+    props.onCardClick(props.card);
   }
 
   function handleLikeClick() {
-    props.onCardLike({ likes: props.likes, _id: props.cardId });
+    props.onCardLike(props.card);
   }
 
   function handleDeleteClick() {

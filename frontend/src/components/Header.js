@@ -6,8 +6,6 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Header({ email, onClick }) {
-  const currentUser = useContext(CurrentUserContext);
-  // console.log(useContext(CurrentUserContext));
   return (
     // currentUser.data ?
     <header className="header">
@@ -19,7 +17,7 @@ function Header({ email, onClick }) {
         <Switch>
           <Route exact path="/">
               <li className="header__nav">
-                <p className="header__email">{currentUser.email}</p>
+                <p className="header__email">{email}</p>
               </li>
               <li className="header__nav">
                 <button className="header__out" onClick={onClick}>

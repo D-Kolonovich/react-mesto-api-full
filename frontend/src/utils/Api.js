@@ -131,15 +131,12 @@ class Api {
       return Promise.reject(`Ошибка: ${result.status}`);
     }
   }
-  
-  // const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 
   const baseUrl = 'http://localhost:3001';
   // const baseUrl = 'https://api.dkmesto.students.nomoredomains.xyz' || 'http://localhost:3001';
 
   const api = new Api({
     baseUrl: baseUrl,
-    
   });
 
   export default api

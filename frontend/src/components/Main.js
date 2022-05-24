@@ -54,21 +54,9 @@ function Main(props) {
       </section>
 
       <section className="elements">
-        {props.cards.map((card) => {
-          if (card.data) {
-            return <Card
-            key={card.data._id}
-            cardId={card.data._id}
-            name={card.data.name}
-            link={card.data.link}
-            ownerId={card.data.owner}
-            likes={card.data.likes}
-            onCardClick={props.onCardClick}
-            onCardLike={props.onCardLike}
-            onCardDelete={props.onCardDelete}
-          />
-          } else {
-            return <Card
+        {props.cards.map((card) => (
+            <Card
+            card={card}
             key={card._id}
             cardId={card._id}
             name={card.name}
@@ -79,9 +67,8 @@ function Main(props) {
             onCardLike={props.onCardLike}
             onCardDelete={props.onCardDelete}
           />
-          }
-          
-        })}
+        )
+        )}
       </section>
     </main>
     : <div>загрузки</div>
