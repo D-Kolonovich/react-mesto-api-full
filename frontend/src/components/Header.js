@@ -9,7 +9,7 @@ function Header({ email, onClick }) {
   const currentUser = useContext(CurrentUserContext);
   // console.log(useContext(CurrentUserContext));
   return (
-    currentUser.data ?
+    // currentUser.data ?
     <header className="header">
       <Link to="/">
         <img src={logoSvg} alt="логотип" className="logo" />
@@ -19,7 +19,7 @@ function Header({ email, onClick }) {
         <Switch>
           <Route exact path="/">
               <li className="header__nav">
-                <p className="header__email">{currentUser.data.email}</p>
+                <p className="header__email">{currentUser.email}</p>
               </li>
               <li className="header__nav">
                 <button className="header__out" onClick={onClick}>
@@ -44,7 +44,7 @@ function Header({ email, onClick }) {
         </Switch>
       </ul>
     </header>
-    : <div>загрузка</div>
+    // : <div>загрузка</div>
   );
 }
 

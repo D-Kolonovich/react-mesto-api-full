@@ -98,8 +98,6 @@ function App() {
     // tokenCheck()
   }, [loggedIn]); // history.location
 
-// console.log('app', currentUser);
-
   // React.useEffect(() => {
   //   api
   //     .getInitialCards()
@@ -138,7 +136,6 @@ function App() {
     api
       .setAvatar(avatar)
       .then((data) => {
-        // console.log(data);
         setCurrentUser(data); // data.user
         closeAllPopups();
       })
@@ -147,8 +144,6 @@ function App() {
       });
   };
 
-  // console.log(currentUser.data);
-  
   const handleCardLike = (card) => {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((like) => like._id === currentUser._id);
@@ -156,6 +151,7 @@ function App() {
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
+        // console.log(newCard, 'card._id');
         setCards((cards) =>
           cards.map((c) => (c._id === card._id ? newCard : c))
         );

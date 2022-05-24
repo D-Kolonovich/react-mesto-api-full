@@ -93,7 +93,7 @@ class Api {
   
     //установить лайк
     setLikeCard(cardId) {
-      return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
         headers: {
           authorization: this._getToken(),
@@ -105,7 +105,7 @@ class Api {
   
     //удалить лайк
     removeLikeCard(cardId) {
-      return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
         headers: {
           authorization: this._getToken(),

@@ -7,8 +7,6 @@ import addButton from "../images/add_button.svg";
 
 function Main(props) {
   const currentUser = useContext(CurrentUserContext);
-  // console.log(useContext(CurrentUserContext));
-// console.log(props.cards, 'card');
   return (
     currentUser.data ?
     <main className="content">
